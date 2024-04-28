@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Sets a clean and modern font */
+            padding: 20px;
+            background-color: #f4f4f9; /* A light grey background */
+        }
+        button {
+            background-color: #4CAF50; /* A nice shade of green */
+            border: none;
+            color: white;
+            padding: 15px 32px; /* Padding around the text */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px; /* A readable text size */
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px; /* Rounded corners */
+        }
+        #status {
+            margin-left: 15px;
+            color: #555; /* Darker grey text for better readability */
+            margin-top: 20px; /* Space above the status text */
+            font-size: 18px; /* Slightly larger text size for emphasis */
+        }
+    </style>
+</head>
+<body>
+    <button id="connectWebSocket">Connect to WebSocket</button>
+    <div id="status">Not connected</div>
+
+    <button id="sendTestMessage">Send Test Message</button>
+    <script src="popup.js"></script>
+</body>
+</html>
