@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Ai Assist-dm",
+  "version": "0.1.0",
+  "description": "My Chrome Extension",
+  "icons": {
+    "16": "icons/favicon.png",
+    "32": "icons/favicon.png",
+    "48": "icons/favicon.png",
+    "128": "icons/favicon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Ai Assist-dm",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["activeTab", "tabs", "scripting", "webRequest"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "run_at": "document_idle",
+      "js": ["contentScript.js"]
+    }
+  ]
+}
