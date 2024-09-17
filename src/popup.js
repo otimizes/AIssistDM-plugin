@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Handle click event for test prompt button
   promptButton.addEventListener("click", async () => {
+    console.log("promptButoon")
     const promptMessage = {
       action: "GPT_PROMPT",
       content: "Olá, como vai?",

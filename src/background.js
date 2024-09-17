@@ -3,6 +3,7 @@
 let socket
 
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  console.log("::onMessage listener")
   if (message.action === "connect") {
     if (socket && socket.readyState === WebSocket.OPEN) {
       sendResponse({ status: 0 })
@@ -24,7 +25,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         }
       }
 
-      socket.onclose = function () {}
+      socket.onclose = function () { }
 
       socket.onerror = function (error) {
         console.error("WebSocket error:", error)
@@ -92,20 +93,25 @@ const getTabIdByTitle = (title) => {
 }
 
 const handleGptPrompt = (tabId, msg) => {
+  console.log("::tabId" + tabId)
   chrome.scripting.executeScript({
     target: { tabId: tabId },
     func: (content) => {
-      document.getElementById("prompt-textarea").value = content
-      document
-        .getElementById("prompt-textarea")
-        .dispatchEvent(new Event("input", { bubbles: true }))
-      document
-        .querySelector('button[data-testid="fruitjuice-send-button"]')
-        .click()
+      console.log("AQUIIIIII")
+      document.getElementById("prompt-textarea").innerHTML = `<p>${content}</p>`
+      // document
+      //   .getElementById("prompt-textarea")
+      //   .dispatchEvent(new Event("input", { bubbles: true }))
+      setTimeout(() => {
+        console.log("CLICKANDOOO")
+        document
+          .querySelector('button[data-testid="send-button"]')
+          .click()
+      }, 1000)
 
       const interval = setInterval(() => {
         let isGenerating = document.querySelector(
-          'button[aria-label="Stop generating"]',
+          'button[aria-label="Stop streaming"]',
         )
         if (!isGenerating) {
           let last = document.querySelectorAll(
@@ -118,7 +124,7 @@ const handleGptPrompt = (tabId, msg) => {
           clearInterval(interval)
           chrome.runtime.sendMessage(
             { action: "GPT_ANSWER", from: "CHAT_GPT", content: content },
-            function (response) {},
+            function (response) { },
           )
         }
       }, 3000)
